@@ -222,8 +222,8 @@
 
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3rem;
       align-items: start;
     }
 
@@ -233,6 +233,14 @@
       line-height: 1;
       text-transform: uppercase;
       color: var(--white);
+    }
+
+    .about-profile-pic {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      border-radius: 4px;
+      border: 1px solid var(--grey-mid);
     }
 
     .about-text {
@@ -318,6 +326,16 @@
       font-weight: 700;
       color: var(--white);
       margin-bottom: 0.3rem;
+    }
+
+    .exp-org-link {
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+
+    .exp-org-link:hover {
+      opacity: 0.8;
     }
 
     .exp-org {
@@ -511,19 +529,25 @@
 
       .nav-links a { font-size: 0.9rem; }
 
-      .hero { padding: 5rem 1.5rem 3rem; }
+      /* Ajustes de início mais acima no telemóvel */
+      .hero { padding: 4rem 1.5rem 2rem; min-height: 85vh; }
+      .hero-bottom { flex-direction: column; align-items: flex-start; margin-top: 1.5rem; }
 
-      .hero-bottom { flex-direction: column; align-items: flex-start; }
+      section { padding: 3rem 1.5rem; }
 
-      section { padding: 4rem 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+      .about-profile-pic { max-width: 280px; margin: 0 auto; }
 
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      /* Esconder logos no telemóvel */
+      .tecnico-logo-container, .exp-logo { display: none !important; }
+      
+      /* Ajustar grelha da educação sem o logo */
+      .edu-grid-mobile { grid-template-columns: 1fr !important; }
 
-      .edu-item { grid-template-columns: 1fr; }
+      .edu-item { grid-template-columns: 1fr; padding: 1.5rem 0; }
       .edu-year { margin-top: 0.3rem; }
 
-      .exp-item { grid-template-columns: 1fr; }
-      .exp-logo { display: none; }
+      .exp-item { grid-template-columns: 1fr; padding: 1.5rem 0; }
 
       .languages-grid { grid-template-columns: 1fr; }
 
@@ -537,7 +561,6 @@
 </head>
 <body>
 
-<!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">VB</a>
   <button class="hamburger" aria-label="Menu" onclick="this.nextElementSibling.classList.toggle('open')">
@@ -552,7 +575,6 @@
   </ul>
 </nav>
 
-<!-- HERO -->
 <section class="hero" id="home">
   <p class="hero-tag">Computer Science &amp; Engineering · Lisbon, PT</p>
   <h1 class="hero-name">
@@ -569,7 +591,6 @@
   </div>
 </section>
 
-<!-- TICKER -->
 <div class="ticker-wrap" aria-hidden="true">
   <div class="ticker">
     <span class="ticker-item"><span class="dot">✦</span>Victória Bernaz</span>
@@ -581,11 +602,13 @@
   </div>
 </div>
 
-<!-- ABOUT -->
 <section class="about" id="about">
   <p class="section-label">01 — About</p>
   <div class="about-grid">
     <h2 class="about-heading">Curious<br>by<br>nature.</h2>
+    
+    <img src="a_tua_foto.jpg" alt="Victória Bernaz" class="about-profile-pic" onerror="this.style.display='none'" />
+    
     <div class="about-text">
       <p>I'm Victória, a first-year Computer Science and Engineering student at Instituto Superior Técnico, one of Europe's leading technical universities.</p>
       <p>I'm passionate about the intersection of technology and creativity — which is why I joined SINFO's Multimedia team, working on visual communication for one of Portugal's biggest free tech conferences.</p>
@@ -594,22 +617,23 @@
   </div>
 </section>
 
-<!-- EDUCATION -->
 <section class="education" id="education">
   <p class="section-label">02 — Education</p>
 
-<div class="edu-item">
-    <div style="display:grid; grid-template-columns:auto 1fr; gap:1rem; align-items:start">
-      <img src="tecnico_logo.png" alt="IST" style="width:48px;height:48px;object-fit:contain;margin-top:4px" />
+  <div class="edu-item">
+    <div class="edu-grid-mobile" style="display:grid; grid-template-columns:auto 1fr; gap:1rem; align-items:start">
+      <div class="tecnico-logo-container">
+        <img src="tecnico_logo.png" alt="IST" style="width:48px;height:48px;object-fit:contain;margin-top:4px" />
+      </div>
       <div>
-      <p class="edu-degree">BSc in Computer Science and Engineering</p>
-      <p class="edu-school">Instituto Superior Técnico · Universidade de Lisboa<br>1st year in progress</p>
-      </div></div>
+        <p class="edu-degree">BSc in Computer Science and Engineering</p>
+        <p class="edu-school">Instituto Superior Técnico · Universidade de Lisboa<br>1st year in progress</p>
+      </div>
+    </div>
     <p class="edu-year">2025–<br>present</p>
   </div>
 </section>
 
-<!-- EXPERIENCE -->
 <section class="experience" id="experience">
   <p class="section-label">03 — Experience</p>
 
@@ -619,13 +643,14 @@
     </div>
     <div class="exp-info">
       <p class="exp-role">Multimedia Team Member</p>
-      <p class="exp-org">SINFO — Semana de Informática</p>
+      <a href="https://sinfo.org/" target="_blank" rel="noopener" class="exp-org-link">
+        <p class="exp-org">SINFO — Semana de Informática ↗</p>
+      </a>
       <p class="exp-period">June 2026 — Present</p>
     </div>
   </div>
 </section>
 
-<!-- SKILLS -->
 <section class="skills" id="skills">
   <p class="section-label">04 — Skills &amp; Languages</p>
 
@@ -674,7 +699,6 @@
   </div>
 </section>
 
-<!-- CONTACT -->
 <section class="contact" id="contact">
   <p class="section-label">05 — Contact</p>
   <h2 class="contact-heading">Let's<br>connect.</h2>
@@ -694,7 +718,6 @@
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <p>© 2026 Victória Bernaz</p>
   <p>Built with HTML &amp; CSS · Hosted on GitHub Pages</p>
